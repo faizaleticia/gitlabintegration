@@ -43,7 +43,7 @@ class PluginGitlabIntegrationItemForm {
     */
    static public function preItemForm($params) {
       $item = $params['item'];
-      if ($item::getType() == Ticket::getType()) {
+      if ($item::getType() == Ticket::getType() && ($item->getField('id') != 0)) {
          $options = $params['options'];
 
          $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
@@ -87,7 +87,7 @@ class PluginGitlabIntegrationItemForm {
     */
    static public function postItemForm($params) {
       $item = $params['item'];
-      if ($item::getType() == Ticket::getType()) {
+      if ($item::getType() == Ticket::getType() && ($item->getField('id') != 0)) {
          $options = $params['options'];
 
          $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
