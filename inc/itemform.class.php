@@ -28,11 +28,11 @@ along with GLPI. If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
- * Summary of PluginExampleItemForm
+ * Summary of PluginGitlabIntegrationItemForm
  * Example of *_item_form implementation
  * @see http://glpi-developer-documentation.rtfd.io/en/master/plugins/hooks.html#items-display-related
  * */
-class PluginExampleItemForm {
+class PluginGitlabIntegrationItemForm {
 
    /**
     * Display contents at the begining of item forms.
@@ -42,8 +42,6 @@ class PluginExampleItemForm {
     * @return void
     */
    static public function preItemForm($params) {
-      var_dump('Pedro');
-      die();
       $item = $params['item'];
       $options = $params['options'];
 
@@ -58,11 +56,11 @@ class PluginExampleItemForm {
       $out .= '</th></tr>';
 
       $out .= "<tr><$firstelt>";
-      $out .= '<label for="example_pre_form_hook">' . __('First pre form hook') . '</label>';
+      $out .= '<label for="example_pre_form_hook">' . __('Teste') . '</label>';
       $out .= "</$firstelt><td>";
       $out .= '<input type="text" name="example_pre_form_hook" id="example_pre_form_hook"/>';
       $out .= "</td><$firstelt>";
-      $out .= '<label for="example_pre_form_hook2">' . __('Second pre form hook') . '</label>';
+      $out .= '<label for="example_pre_form_hook2">' . __('Teste1') . '</label>';
       $out .= "</$firstelt><td>";
       $out .= '<input type="text" name="example_pre_form_hook2" id="example_pre_form_hook2"/>';
       $out .= '</td></tr>';
@@ -104,7 +102,7 @@ class PluginExampleItemForm {
       $out .= "</$firstelt><td>";
       $out .= '<input type="text" name="example_post_form_hook" id="example_post_form_hook"/>';
       $out .= "</td><$firstelt>";
-      $out .= '<label for="example_post_form_hook2">' . __('Second post form hook') . '</label>';
+      $out .= '<label for="example_post_form_hook2">' . __('post form hook') . '</label>';
       $out .= "</$firstelt><td>";
       $out .= '<input type="text" name="example_post_form_hook2" id="example_post_form_hook2"/>';
       $out .= '</td></tr>';

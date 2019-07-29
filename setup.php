@@ -3,22 +3,17 @@
 
 function plugin_init_gitlabintegration() {
 
-	global $PLUGIN_HOOKS,$CFG_GLPI;
+	global $PLUGIN_HOOKS, $CFG_GLPI;
 
+	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/itemform.class.php");
+		
 	// CSRF compliance : All actions must be done via POST and forms closed by Html::closeForm();
 	$PLUGIN_HOOKS['csrf_compliant']['gitlabintegration'] = true;
 
- 
-	$PLUGIN_HOOKS['pre_item_form']['gitlabintegration']    = ['PluginExampleItemForm', 'preItemForm'];
-	$PLUGIN_HOOKS['post_item_form']['gitlabintegration']   = ['PluginExampleItemForm', 'postItemForm'];
- 
-	// declare this plugin as an import plugin for Computer itemtype
-	$PLUGIN_HOOKS['import_item']['gitlabintegration'] = ['Computer' => ['Plugin']];
- 
-	// add additional informations on Computer::showForm
-	$PLUGIN_HOOKS['autoinventory_information']['gitlabintegration'] =  [
-	   'Computer' =>  ['PluginExampleComputer', 'showInfo']
-	];
+	if (class_exists('PluginGitlabIntegrationItemForm')) {
+		$PLUGIN_HOOKS['pre_item_form']['gitlabintegration']    = ['PluginGitlabIntegrationItemForm', 'preItemForm'];
+		$PLUGIN_HOOKS['post_item_form']['gitlabintegration']   = ['PluginGitlabIntegrationItemForm', 'postItemForm'];
+	}
 }
 
 

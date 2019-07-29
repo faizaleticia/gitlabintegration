@@ -27,7 +27,6 @@ function plugin_gitlabintegration_install(){
 					FOREIGN KEY (`ticket_id`) REFERENCES `glpi_tickets` (`id`)";
 	    $DB->queryOrDie($query, $DB->error());
 	}
-
 	// To be called for each task the plugin manage
    	// task in class
    	CronTask::Register('PluginExampleExample', 'Sample', DAY_TIMESTAMP, ['param' => 50]);
