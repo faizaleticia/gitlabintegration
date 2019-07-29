@@ -43,37 +43,39 @@ class PluginGitlabIntegrationItemForm {
     */
    static public function preItemForm($params) {
       $item = $params['item'];
-      $options = $params['options'];
+      if ($item::getType() == Ticket::getType()) {
+         $options = $params['options'];
 
-      $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
+         $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
 
-      $out = '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-      $out .= sprintf(
-         __('Start %1$s hook call for %2$s type'),
-         'pre_item_form',
-         $item::getType()
-      );
-      $out .= '</th></tr>';
+         $out = '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
+         $out .= sprintf(
+            __('Start %1$s hook call for %2$s type'),
+            'pre_item_form',
+            $item::getType()
+         );
+         $out .= '</th></tr>';
 
-      $out .= "<tr><$firstelt>";
-      $out .= '<label for="example_pre_form_hook">' . __('Teste') . '</label>';
-      $out .= "</$firstelt><td>";
-      $out .= '<input type="text" name="example_pre_form_hook" id="example_pre_form_hook"/>';
-      $out .= "</td><$firstelt>";
-      $out .= '<label for="example_pre_form_hook2">' . __('Teste1') . '</label>';
-      $out .= "</$firstelt><td>";
-      $out .= '<input type="text" name="example_pre_form_hook2" id="example_pre_form_hook2"/>';
-      $out .= '</td></tr>';
+         $out .= "<tr><$firstelt>";
+         $out .= '<label for="example_pre_form_hook">' . __('Teste') . '</label>';
+         $out .= "</$firstelt><td>";
+         $out .= '<input type="text" name="example_pre_form_hook" id="example_pre_form_hook"/>';
+         $out .= "</td><$firstelt>";
+         $out .= '<label for="example_pre_form_hook2">' . __('Teste1') . '</label>';
+         $out .= "</$firstelt><td>";
+         $out .= '<input type="text" name="example_pre_form_hook2" id="example_pre_form_hook2"/>';
+         $out .= '</td></tr>';
 
-      $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-      $out .= sprintf(
-         __('End %1$s hook call for %2$s type'),
-         'pre_item_form',
-         $item::getType()
-      );
-      $out .= '</th></tr>';
+         $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
+         $out .= sprintf(
+            __('End %1$s hook call for %2$s type'),
+            'pre_item_form',
+            $item::getType()
+         );
+         $out .= '</th></tr>';
 
-      echo $out;
+         echo $out;
+      }
    }
 
    /**
@@ -85,36 +87,38 @@ class PluginGitlabIntegrationItemForm {
     */
    static public function postItemForm($params) {
       $item = $params['item'];
-      $options = $params['options'];
+      if ($item::getType() == Ticket::getType()) {
+         $options = $params['options'];
 
-      $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
+         $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
 
-      $out = '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-      $out .= sprintf(
-         __('Start %1$s hook call for %2$s type'),
-         'post_item_form',
-         $item::getType()
-      );
-      $out .= '</th></tr>';
+         $out = '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
+         $out .= sprintf(
+            __('Start %1$s hook call for %2$s type'),
+            'post_item_form',
+            $item::getType()
+         );
+         $out .= '</th></tr>';
 
-      $out .= "<tr><$firstelt>";
-      $out .= '<label for="example_post_form_hook">' . __('First post form hook') . '</label>';
-      $out .= "</$firstelt><td>";
-      $out .= '<input type="text" name="example_post_form_hook" id="example_post_form_hook"/>';
-      $out .= "</td><$firstelt>";
-      $out .= '<label for="example_post_form_hook2">' . __('post form hook') . '</label>';
-      $out .= "</$firstelt><td>";
-      $out .= '<input type="text" name="example_post_form_hook2" id="example_post_form_hook2"/>';
-      $out .= '</td></tr>';
+         $out .= "<tr><$firstelt>";
+         $out .= '<label for="example_post_form_hook">' . __('First post form hook') . '</label>';
+         $out .= "</$firstelt><td>";
+         $out .= '<input type="text" name="example_post_form_hook" id="example_post_form_hook"/>';
+         $out .= "</td><$firstelt>";
+         $out .= '<label for="example_post_form_hook2">' . __('post form hook') . '</label>';
+         $out .= "</$firstelt><td>";
+         $out .= '<input type="text" name="example_post_form_hook2" id="example_post_form_hook2"/>';
+         $out .= '</td></tr>';
 
-      $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-      $out .= sprintf(
-         __('End %1$s hook call for %2$s type'),
-         'post_item_form',
-         $item::getType()
-      );
-      $out .= '</th></tr>';
+         $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
+         $out .= sprintf(
+            __('End %1$s hook call for %2$s type'),
+            'post_item_form',
+            $item::getType()
+         );
+         $out .= '</th></tr>';
 
-      echo $out;
+         echo $out;
+      } 
    }
 }
