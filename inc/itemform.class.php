@@ -41,84 +41,51 @@ class PluginGitlabIntegrationItemForm {
     *
     * @return void
     */
-   static public function preItemForm($params) {
-      $item = $params['item'];
-      if ($item::getType() == Ticket::getType() && ($item->getField('id') != 0)) {
-         $options = $params['options'];
-
-         $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
-
-         $out = '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-         $out .= sprintf(
-            __('Start %1$s hook call for %2$s type'),
-            'pre_item_form',
-            $item::getType()
-         );
-         $out .= '</th></tr>';
-
-         $out .= "<tr><$firstelt>";
-         $out .= '<label for="example_pre_form_hook">' . __('Teste') . '</label>';
-         $out .= "</$firstelt><td>";
-         $out .= '<input type="text" name="example_pre_form_hook" id="example_pre_form_hook"/>';
-         $out .= "</td><$firstelt>";
-         $out .= '<label for="example_pre_form_hook2">' . __('Teste1') . '</label>';
-         $out .= "</$firstelt><td>";
-         $out .= '<input type="text" name="example_pre_form_hook2" id="example_pre_form_hook2"/>';
-         $out .= '</td></tr>';
-
-         $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-         $out .= sprintf(
-            __('End %1$s hook call for %2$s type'),
-            'pre_item_form',
-            $item::getType()
-         );
-         $out .= '</th></tr>';
-
-         echo $out;
-      }
-   }
-
-   /**
-    * Display contents at the begining of item forms.
-    *
-    * @param array $params Array with "item" and "options" keys
-    *
-    * @return void
-    */
    static public function postItemForm($params) {
       $item = $params['item'];
-      if ($item::getType() == Ticket::getType() && ($item->getField('id') != 0)) {
+
+      $canCreate = self::verifyPermition();
+
+      if ($item::getType() == Ticket::getType() && ($item->getField('id') != 0) && ($canCreate)) {
          $options = $params['options'];
 
          $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
 
-         $out = '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
+         $out = "<tr>";
+         $out .= "<td>";
+         $out .= "</td>";
+         $out .= "</tr>";
+
+         $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
          $out .= sprintf(
-            __('Start %1$s hook call for %2$s type'),
+            __('Integrate with Gitlab'),
             'post_item_form',
             $item::getType()
          );
          $out .= '</th></tr>';
 
          $out .= "<tr><$firstelt>";
-         $out .= '<label for="example_post_form_hook">' . __('First post form hook') . '</label>';
+         $out .= '<label>' . __('Create Issue') . '</label>';
          $out .= "</$firstelt><td>";
-         $out .= '<input type="text" name="example_post_form_hook" id="example_post_form_hook"/>';
-         $out .= "</td><$firstelt>";
-         $out .= '<label for="example_post_form_hook2">' . __('post form hook') . '</label>';
-         $out .= "</$firstelt><td>";
-         $out .= '<input type="text" name="example_post_form_hook2" id="example_post_form_hook2"/>';
-         $out .= '</td></tr>';
-
-         $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-         $out .= sprintf(
-            __('End %1$s hook call for %2$s type'),
-            'post_item_form',
-            $item::getType()
-         );
-         $out .= '</th></tr>';
+         $out .= "</td>";
+         $out .= '</tr>';
 
          echo $out;
       } 
+   }
+
+   static private function verifyPermition() {
+      global $DB;
+      $result = $DB->request('glpi_plugin_profiles_users', ['FIELDS' => 'profile_id']);
+      // => SELECT `profile_id` FROM `glpi_plugin_profiles_users`
+
+      $canCreate = false;
+      foreach ($result as $row) {
+         if ($row['profile_id'] == $_SESSION['glpiactiveprofile']['id']) {
+            $canCreate = true;
+            break;
+         }
+      }
+      return $canCreate;
    }
 }
