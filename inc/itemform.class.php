@@ -29,8 +29,6 @@ along with GLPI. If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Summary of PluginGitlabIntegrationItemForm
- * Example of *_item_form implementation
- * @see http://glpi-developer-documentation.rtfd.io/en/master/plugins/hooks.html#items-display-related
  * */
 class PluginGitlabIntegrationItemForm {
 
@@ -51,33 +49,32 @@ class PluginGitlabIntegrationItemForm {
 
          $firstelt = ($item::getType() == Ticket::getType() ? 'th' : 'td');
 
-         $out = "<tr>";
-         $out .= "<td>";
-         $out .= "</td>";
-         $out .= "</tr>";
+         echo "<tr>";
+         echo "<td>";
+         echo "</td>";
+         echo "</tr>";
 
-         $out .= '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-         $out .= sprintf(
-            __('Integrate with Gitlab'),
+         echo '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
+         echo sprintf(
+            __('Integration with Gitlab'),
             'post_item_form',
             $item::getType()
          );
-         $out .= '</th></tr>';
+         echo '</th></tr>';
 
-         $out .= "<tr><$firstelt>";
-         $out .= '<label>' . __('Create Issue') . '</label>';
-         $out .= "</$firstelt><td>";
-         $out .= "</td>";
-         $out .= '</tr>';
-
-         echo $out;
+         echo "<tr><$firstelt>";
+         echo '<label>' . __('Create Issue') . '</label>';
+         echo "</$firstelt><td>";
+         self::dropdownProject();
+         echo "</td>";
+         echo '</tr>';
       } 
    }
 
    static private function verifyPermition() {
       global $DB;
-      $result = $DB->request('glpi_plugin_profiles_users', ['FIELDS' => 'profile_id']);
-      // => SELECT `profile_id` FROM `glpi_plugin_profiles_users`
+      $result = $DB->request('glpi_plugin_gitlab_profiles_users', ['FIELDS' => 'profile_id']);
+      // => SELECT `profile_id` FROM `glpi_plugin_gitlab_profiles_users`
 
       $canCreate = false;
       foreach ($result as $row) {
@@ -87,5 +84,62 @@ class PluginGitlabIntegrationItemForm {
          }
       }
       return $canCreate;
+   }
+
+   static function dropdownProject(array $options = []) {
+      global $CFG_GLPI;
+   
+      $p = [
+         'name'     => 'project',
+         'value'    => 0,
+         'showtype' => 'normal',
+         'display'  => true,
+      ];
+   
+      if (is_array($options) && count($options)) {
+         foreach ($options as $key => $val) {
+            $p[$key] = $val;
+         }
+      }
+   
+      $values = []; 
+
+      global $DB;
+
+      $result = $DB->request('glpi_plugin_gitlab_parameters', ['name' => ['gitlab_url','gitlab_token']]);
+      // SELECT * FROM glpi_plugin_gitlab_parameters WHERE NAME IN ('gitlab_url', 'gitlab_token');
+
+      foreach ($result as $row) {
+         if ($row['name'] == 'gitlab_url') {
+            $url = $row['value'];
+         } else if ($row['name'] == 'gitlab_token') {
+            $token = $row['value'];
+         }
+      }
+
+      $url = $url . 'api/v4/projects/';
+   
+      $headers = array(
+         'PRIVATE-TOKEN: ' . $token
+      );
+   
+      $curl = curl_init();
+      curl_setopt($curl, CURLOPT_URL, $url);
+   
+      curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+      
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+   
+      $result = curl_exec($curl);
+   
+      $result = json_decode($result);
+   
+      foreach ($result as $key => $value) {
+         $values[$value->id] = $value->name_with_namespace;
+      }
+   
+      curl_close($curl);
+   
+      return Dropdown::showFromArray($p['name'], $values, $p);
    }
 }

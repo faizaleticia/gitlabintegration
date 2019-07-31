@@ -11,7 +11,7 @@ function plugin_init_gitlabintegration() {
 	$PLUGIN_HOOKS['csrf_compliant']['gitlabintegration'] = true;
 
 	if (class_exists('PluginGitlabIntegrationItemForm')) {
-		$PLUGIN_HOOKS['post_item_form']['gitlabintegration']   = ['PluginGitlabIntegrationItemForm', 'postItemForm'];
+		$PLUGIN_HOOKS['post_item_form']['gitlabintegration'] = ['PluginGitlabIntegrationItemForm', 'postItemForm'];
 	}
 }
 

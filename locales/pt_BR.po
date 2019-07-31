@@ -202,3 +202,7 @@ msgstr "Instalado / não configurado"
 #: config.php:48
 msgid "This is the plugin config page"
 msgstr "Esta é a página de configuração do plugin"
+
+#: itemform.class.php:59
+msgid "Integration with Gitlab"
+msgstr "Integração com o Gitlab"
