@@ -70,7 +70,7 @@ class PluginGitlabIntegrationItemForm {
          
          echo "<td style='text-align: left; width: 5px'>";
          
-         echo "<div class='primary-button' onClick='createIssue({$item->getField('id')},{$dropdown}, {$selectedProject})'>Create Issue</a>";
+         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $item->getField('content') . "\")'>Create Issue</a>";
 
          echo "</td>";
          echo '</tr>';
@@ -79,6 +79,13 @@ class PluginGitlabIntegrationItemForm {
       } 
    }
 
+   /**
+    * Display contents at the selected project of item forms.
+    *
+    * @param $ticketId
+    *
+    * @return $selectedProject
+    */
    static private function getSelectedProject($ticketId) {
       global $DB;
 
@@ -91,7 +98,14 @@ class PluginGitlabIntegrationItemForm {
 
       return $selectedProject;
    }  
-
+   
+   /**
+    * Display contents at the profiles have permition of item forms.
+    *
+    * @param void
+    *
+    * @return boolean $canCreate
+    */
    static private function verifyPermition() {
       global $DB;
       $result = $DB->request('glpi_plugin_gitlab_profiles_users', ['FIELDS' => 'profile_id']);
@@ -107,6 +121,13 @@ class PluginGitlabIntegrationItemForm {
       return $canCreate;
    }
 
+   /**
+    * Display contents at the component of item forms.
+    *
+    * @param array $options
+    *
+    * @return Dropdown component
+    */
    static function dropdownProject(array $options = []) {
       global $CFG_GLPI;
    
@@ -125,23 +146,12 @@ class PluginGitlabIntegrationItemForm {
    
       $values = []; 
 
-      global $DB;
+      $parameters = PluginGitlabIntegrationParameters::getParameters();
 
-      $result = $DB->request('glpi_plugin_gitlab_parameters', ['name' => ['gitlab_url','gitlab_token']]);
-      // SELECT * FROM glpi_plugin_gitlab_parameters WHERE NAME IN ('gitlab_url', 'gitlab_token');
-
-      foreach ($result as $row) {
-         if ($row['name'] == 'gitlab_url') {
-            $url = $row['value'];
-         } else if ($row['name'] == 'gitlab_token') {
-            $token = $row['value'];
-         }
-      }
-
-      $url = $url . 'api/v4/projects/';
+      $url = $parameters['url'] . 'api/v4/projects/';
    
       $headers = array(
-         'PRIVATE-TOKEN: ' . $token
+         'PRIVATE-TOKEN: ' . $parameters['token']
       );
    
       $curl = curl_init();

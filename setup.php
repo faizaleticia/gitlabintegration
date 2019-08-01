@@ -6,6 +6,9 @@ function plugin_init_gitlabintegration() {
 	global $PLUGIN_HOOKS, $CFG_GLPI;
 
 	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/itemform.class.php");
+	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/eventlog.class.php");
+	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/parameters.class.php");
+
 	$PLUGIN_HOOKS['add_css']['gitlabintegration'][] = "css/styles.css";
 	$PLUGIN_HOOKS['add_javascript']['gitlabintegration'][] = 'js/buttonsFunctions.js';
 	

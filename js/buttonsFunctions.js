@@ -1,4 +1,4 @@
-function createIssue(ticketId, dropdown, selectedProject) {
+function createIssue(ticketId, dropdown, selectedProject, ticketName, ticketContent) {
     let dropdownProject = document.getElementById('dropdown_project' + dropdown);
     let newSelectedProject = dropdownProject.options[dropdownProject.selectedIndex].value;
 
@@ -14,7 +14,9 @@ function createIssue(ticketId, dropdown, selectedProject) {
             url: "../plugins/gitlabintegration/ajax/issue.php",
             data: {
                 selectedProject: newSelectedProject,
-                ticketId: ticketId
+                ticketId: ticketId,
+                ticketName: ticketName,
+                ticketContent: ticketContent
             }
         })
             .success(function () {
