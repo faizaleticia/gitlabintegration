@@ -63,14 +63,14 @@ class PluginGitlabIntegrationItemForm {
          $selectedProject = self::getSelectedProject($item->getField('id'));
 
          echo "<script type='text/javascript'>";
-         echo "myFunction({$dropdown},{$selectedProject})";
+         echo "setSelectedProject({$dropdown},{$selectedProject})";
          echo "</script>";
 
          echo "</td>";
          
          echo "<td style='text-align: left; width: 5px'>";
          
-         echo "<div class='primary-button' onClick='createIssue({$item->getField('id')},{$dropdown})'>Create Issue</a>";
+         echo "<div class='primary-button' onClick='createIssue({$item->getField('id')},{$dropdown}, {$selectedProject})'>Create Issue</a>";
 
          echo "</td>";
          echo '</tr>';
