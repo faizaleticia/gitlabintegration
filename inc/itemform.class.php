@@ -40,6 +40,7 @@ class PluginGitlabIntegrationItemForm {
     * @return void
     */
    static public function postItemForm($params) {
+      global $CFG_GLPI;
       $item = $params['item'];
 
       $canCreate = self::verifyPermition();
@@ -54,22 +55,42 @@ class PluginGitlabIntegrationItemForm {
          echo "</td>";
          echo "</tr>";
 
-         echo '<tr><th colspan="' . (isset($options['colspan']) ? $options['colspan'] * 2 : '4') . '">';
-         echo sprintf(
-            __('Integration with Gitlab'),
-            'post_item_form',
-            $item::getType()
-         );
-         echo '</th></tr>';
-
          echo "<tr><$firstelt>";
-         echo '<label>' . __('Create Issue') . '</label>';
+         echo '<label>' . __('Gitlab Project') . '</label>';
          echo "</$firstelt><td>";
-         self::dropdownProject();
+
+         $dropdown = self::dropdownProject(['value' => 'Project']);
+         $selectedProject = self::getSelectedProject($item->getField('id'));
+
+         echo "<script type='text/javascript'>";
+         echo "myFunction({$dropdown},{$selectedProject})";
+         echo "</script>";
+
+         echo "</td>";
+         
+         echo "<td style='text-align: left; width: 5px'>";
+         
+         echo "<div class='primary-button' onClick='createIssue({$item->getField('id')},{$dropdown})'>Create Issue</a>";
+
          echo "</td>";
          echo '</tr>';
+
+         echo '<tr style="padding:10px"><td style="padding:10px"></td></tr>';
       } 
    }
+
+   static private function getSelectedProject($ticketId) {
+      global $DB;
+
+      $result = $DB->request('glpi_plugin_gitlab_integration', ['ticket_id' => [$ticketId]]);
+      $selectedProject = 0;
+
+      foreach($result as $row) {
+         $selectedProject = $row['gitlab_project_id'];
+      }
+
+      return $selectedProject;
+   }  
 
    static private function verifyPermition() {
       global $DB;

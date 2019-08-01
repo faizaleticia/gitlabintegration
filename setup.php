@@ -6,7 +6,9 @@ function plugin_init_gitlabintegration() {
 	global $PLUGIN_HOOKS, $CFG_GLPI;
 
 	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/itemform.class.php");
-		
+	$PLUGIN_HOOKS['add_css']['gitlabintegration'][] = "css/styles.css";
+	$PLUGIN_HOOKS['add_javascript']['gitlabintegration'][] = 'js/buttonsFunctions.js';
+	
 	// CSRF compliance : All actions must be done via POST and forms closed by Html::closeForm();
 	$PLUGIN_HOOKS['csrf_compliant']['gitlabintegration'] = true;
 
