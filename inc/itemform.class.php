@@ -146,30 +146,11 @@ class PluginGitlabIntegrationItemForm {
    
       $values = []; 
 
-      $parameters = PluginGitlabIntegrationParameters::getParameters();
-
-      $url = $parameters['url'] . 'api/v4/projects/';
-   
-      $headers = array(
-         'PRIVATE-TOKEN: ' . $parameters['token']
-      );
-   
-      $curl = curl_init();
-      curl_setopt($curl, CURLOPT_URL, $url);
-   
-      curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-      
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-   
-      $result = curl_exec($curl);
-   
-      $result = json_decode($result);
+      $result = PluginGitlabIntegrationGitlabIntegration::getProjects();
    
       foreach ($result as $key => $value) {
          $values[$value->id] = $value->name_with_namespace;
       }
-   
-      curl_close($curl);
    
       return Dropdown::showFromArray($p['name'], $values, $p);
    }

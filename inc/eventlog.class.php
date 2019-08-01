@@ -62,9 +62,11 @@ class PluginGitlabIntegrationEventLog {
     * @return void
     */
     static public function ErrorLog($error) {
-        $fileLog = fopen(GLPI_ROOT . "/plugins/gitlabintegration/logs/error.log", "a");
-        fwrite($fileLog, $error . PHP_EOL);
-        fclose($fileLog);
+        if ($error) {
+            $fileLog = fopen(GLPI_ROOT . "/plugins/gitlabintegration/logs/error.log", "a");
+            fwrite($fileLog, $error . PHP_EOL);
+            fclose($fileLog);
+        }
     }
 
     /**
@@ -75,8 +77,10 @@ class PluginGitlabIntegrationEventLog {
     * @return void
     */
     static public function CreatedIssueLog($issue) {
-        $fileLog = fopen(GLPI_ROOT . "/plugins/gitlabintegration/logs/created-issue.log", "a");
-        fwrite($fileLog, $issue . PHP_EOL);
-        fclose($fileLog);
+        if ($issue) {
+            $fileLog = fopen(GLPI_ROOT . "/plugins/gitlabintegration/logs/created-issue.log", "a");
+            fwrite($fileLog, $issue . PHP_EOL);
+            fclose($fileLog);
+        }
     }
 }
