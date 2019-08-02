@@ -1,6 +1,6 @@
 <?php
 
-function plugin_gitlabintegration_install(){
+function plugin_gitlabintegration_install() {
 	
 	global $DB;
 
@@ -21,13 +21,14 @@ function plugin_gitlabintegration_install(){
 	//Create table glpi_plugin_gitlab_parameters only if it does not exists yet!
 	plugin_gitlabintegration_create_parameters($DB);
 
+	//Insert parameters at table glpi_plugin_gitlab_parameters only if it exist!
 	plugin_gitlabintegration_insert_parameters($DB);
  
 	return true;
 }
 
 
-function plugin_gitlabintegration_uninstall(){
+function plugin_gitlabintegration_uninstall() {
 
 	global $DB;
 	
@@ -128,22 +129,27 @@ function plugin_gitlabintegration_delete_parameters($DB) {
 }
 
 function plugin_gitlabintegration_insert_parameters($DB) {
-	$parameters = [[
-		'name'  => 'gitlab_url',
-		'value' => NULL
-	],
-	[
-		'name'  => 'gitlab_token',
-		'value' => NULL
-	]];
-	
-	foreach ($parameters as $parameter) {
-		$DB->insert(
-			'glpi_plugin_gitlab_parameters', [
-				'name'  => $parameter['name'],
-				'value' => $parameter['value']
-			]
-		);
+	if ($DB->tableExists('glpi_plugin_gitlab_parameters')) {
+
+		$ini_array = parse_ini_file("gitlabintegration.ini");
+
+		$parameters = [[
+			'name'  => 'gitlab_url',
+			'value' => $ini_array['GITLAB_URL'] == "" ? NULL : $ini_array['GITLAB_URL']
+		],
+		[
+			'name'  => 'gitlab_token',
+			'value' => $ini_array['GITLAB_TOKEN'] == "" ? NULL : $ini_array['GITLAB_TOKEN']
+		]];
+		
+		foreach ($parameters as $parameter) {
+			$DB->insert(
+				'glpi_plugin_gitlab_parameters', [
+					'name'  => $parameter['name'],
+					'value' => $parameter['value']
+				]
+			);
+		}
 	}
 }
 

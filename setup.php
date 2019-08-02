@@ -1,6 +1,5 @@
 <?php
 
-
 function plugin_init_gitlabintegration() {
 
 	global $PLUGIN_HOOKS, $CFG_GLPI;
@@ -22,7 +21,7 @@ function plugin_init_gitlabintegration() {
 }
 
 
-function plugin_version_gitlabintegration(){
+function plugin_version_gitlabintegration() {
 	global $DB, $LANG;
 
 	return array('name'			  => __('Gitlab Integration','gitlabintegration'),
@@ -35,7 +34,7 @@ function plugin_version_gitlabintegration(){
 }
 
 
-function plugin_gitlabintegration_check_prerequisites(){
+function plugin_gitlabintegration_check_prerequisites() {
      if (GLPI_VERSION >= 9.4){
          return true;
      } else {
@@ -44,7 +43,7 @@ function plugin_gitlabintegration_check_prerequisites(){
 }
 
 
-function plugin_gitlabintegration_check_config($verbose=false){
+function plugin_gitlabintegration_check_config($verbose=false) {
 	if ($verbose) {
 		echo 'Installed / not configured';
 	}
