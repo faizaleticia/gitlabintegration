@@ -3,11 +3,13 @@
 function plugin_init_gitlabintegration() {
 
 	global $PLUGIN_HOOKS, $CFG_GLPI;
-
+	
 	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/itemform.class.php");
 	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/eventlog.class.php");
 	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/parameters.class.php");
 	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/gitlabintegration.class.php");
+	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/menu.class.php");
+	include_once (GLPI_ROOT . "/plugins/gitlabintegration/inc/profiles.class.php");
 
 	$PLUGIN_HOOKS['add_css']['gitlabintegration'][] = "css/styles.css";
 	$PLUGIN_HOOKS['add_javascript']['gitlabintegration'][] = 'js/buttonsFunctions.js';
@@ -18,6 +20,9 @@ function plugin_init_gitlabintegration() {
 	if (class_exists('PluginGitlabIntegrationItemForm')) {
 		$PLUGIN_HOOKS['post_item_form']['gitlabintegration'] = ['PluginGitlabIntegrationItemForm', 'postItemForm'];
 	}
+
+	// add entry to configuration menu
+	$PLUGIN_HOOKS['menu_toadd']['gitlabintegration']['admin'] = 'PluginGitlabIntegrationMenu';
 }
 
 

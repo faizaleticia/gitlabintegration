@@ -3,7 +3,7 @@
 /*
  -------------------------------------------------------------------------
 GLPI - Gestionnaire Libre de Parc Informatique
-Copyright (C) 2003-2011 by the INDEPNET Development Team.
+Copyright (C) 2003-2019 by the INDEPNET Development Team.
 
 http://indepnet.net/   http://glpi-project.org
 -------------------------------------------------------------------------
