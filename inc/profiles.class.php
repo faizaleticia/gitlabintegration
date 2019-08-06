@@ -26,44 +26,39 @@ along with GLPI. If not, see <http://www.gnu.org/licenses/>.
 --------------------------------------------------------------------------
  */
 
+define('GLPI_ROOT', '../../..');
+
 /**
  * Summary of PluginGitlabIntegrationProfiles
  * */
-class PluginGitlabIntegrationProfiles extends CommonDBTM {
-    
-    static $rightname = 'config';
-    
-    /**
-    * Display contents the permition create of profiles permitions.
-    *
-    * @param void
-    *
-    * @return boolean with the permition
-    */
-    static function canCreate() {
-        return self::canUpdate();
-    }
-  
-    /**
-    * Display contents the link of profiles permitions
-    *
-    * @param void
-    *
-    * @return void
-    */
-    static function titleList() {
-        echo "<div class='center'><a class='vsubmit' href='regenerate_files.php'><i class='pointer fa fa-refresh'></i>&nbsp;".
-              __("Permitions Gitlab", "gitlabintegration")."</a></div>";
-    }
 
-    /**
-    * Display contents the menu name of profiles permitions
-    *
-    * @param void
-    *
-    * @return string with the menu name
-    */
-    static function getTypeName($nb = 0) {
-        return __("Permitions Gitlab", "gitlabintegration");
-    }
+class PluginGitlabIntegrationProfiles extends CommonDBTM {
+   static $rightname = 'profiles';
+   
+   static function canCreate() {
+      return self::canUpdate();
+   }
+
+   static function title() {
+      echo "<table class='tab_glpi'><tbody>";
+      echo "<tr>";
+      echo "<td width='45px'>";
+      echo"<img src='".GLPI_ROOT."/plugins/gitlabintegration/img/just-logo.png' height='35px' alt='Gitlab STW' title='Gitlab STW'>";
+      echo "</td>";
+      echo "<td>";
+      echo "<a class='vsubmit' href='https://gitlab.stwautomacao.com.br' target='_blank'>Gitlab STW</a>";
+      echo "</td>";
+      echo "</tr>";
+      echo "</tbody></table>";
+   }
+
+   static function configPage() {
+      $numrows = 0;
+      Html::printPager($values['start'], $numrows, $_SERVER['PHP_SELF'], '');
+   }
+
+   // Should return the localized name of the type
+   static function getTypeName($nb = 0) {
+      return 'Permitions Gitlab';
+   }
 }
