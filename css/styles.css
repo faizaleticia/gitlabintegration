@@ -20,3 +20,7 @@
 .primary-button a:hover {
     color:red !important;
 }
+
+.left {
+    text-align:left; 
+}

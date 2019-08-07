@@ -79,13 +79,21 @@ function plugin_gitlabintegration_create_profiles($DB) {
 	    $query = "CREATE TABLE `glpi_plugin_gitlab_profiles_users` (
 				   `id` INT(11) NOT NULL AUTO_INCREMENT,
 				   `profile_id` INT(11) NOT NULL,
-				   PRIMARY KEY  (`id`)
+				   `user_id` INT(11) NOT NULL,
+				   `created_at` DATETIME,
+				   `updated_at` DATETIME,
+				   PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 	    $DB->queryOrDie($query, $DB->error());
 
 	    $query = "ALTER TABLE `glpi_plugin_gitlab_profiles_users` 
 	                ADD CONSTRAINT `fk_gitlab_profile` 
 					FOREIGN KEY (`profile_id`) REFERENCES `glpi_profiles` (`id`)";
+		$DB->queryOrDie($query, $DB->error());
+		
+		$query = "ALTER TABLE `glpi_plugin_gitlab_profiles_users` 
+	                ADD CONSTRAINT `fk_gitlab_user` 
+					FOREIGN KEY (`user_id`) REFERENCES `glpi_users` (`id`)";
 	    $DB->queryOrDie($query, $DB->error());
 	}
 }

@@ -77,4 +77,114 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       $link = "$front_fields/profiles.form.php?itemtype=$itemtype";
       return $link;
    }
+   
+   static function massiveActions() {
+      self::headMassiveActions(true);
+
+      self::tableMassiveActions();
+
+      self::headMassiveActions(false);
+   }
+
+   private static function headMassiveActions($top = true) {
+      echo '<form name = "massformUser" method="post" action="/front/massiveaction.php">';
+      echo '<table class="tab_glpi" width="95%">';
+      echo '<tbody>';
+      echo '<tr>';
+      echo '<td width="30px">';
+      if ($top) {
+         echo '<img src="/pics/arrow-left-top.png" alt="">';
+      } else {
+         echo '<img src="/pics/arrow-left.png" alt="">';
+      }
+      echo '</td>';
+      echo '<td width="100%" class="left">';
+      echo '<a class="primary-button" onclick="" href="" title="Actions">'. __('Actions') . '</a>';
+      echo '</td>';
+      echo '</tr>';
+      echo '</tbody>';
+      echo '</table>';
+      echo '</form>';
+   }
+
+   private static function tableMassiveActions() {
+      echo '<div class="center">';
+      echo '<table border="0" class="tab_cadrehov">';
+      self::titleTable();
+      self::bodyTable();
+      self::titleTable();
+      echo '</table>';
+      echo '</div>';
+   }
+
+   private static function titleTable() {
+      echo '<thread>';
+      echo '<tr class="tab_bg_2">';
+      echo '<th class="left">';
+      Html::showCheckbox(['name' => 'checkAll', 'checked' => false]);
+      echo '</th>';
+      echo '<th class="left" style="width:30%">';
+      echo '<a href="#">Profile</a>';
+      echo '</th>';
+      echo '<th class="left" style="width:20%">';
+      echo '<a href="#">Created By</a>';
+      echo '</th>';
+      echo '<th>';
+      echo '<a href="#">Created At</a>';
+      echo '</th>';
+      echo '<th>';
+      echo '<a href="#">Last Update</a>';
+      echo '</th>';
+      echo '<th style="width:100px">';
+      echo '<a href="#">ID</a>';
+      echo '</th>';
+      echo '</tr>';
+      echo '</thread>';
+   }
+
+   private static function bodyTable() {
+      $result = self::getProfilesUsers();
+
+      echo '<tbody>';
+      foreach($result as $row) {
+         $profile = $row['profile'];
+         $user    = $row['firstname_user'] . ' ' . $row['realname_user'];
+         $created = $row['created_at'];
+         $updated = $row['updated_at'];
+         $id      = $row['id'];
+      
+         echo '<tr class="tab_bg_2">';
+         echo '<td width="10" valign="top">';
+         Html::showCheckbox(['name' => 'checkAll', 'checked' => false]);
+         echo '</td>';
+         echo '<td valign="top">';
+         echo $profile;
+         echo '</td>';
+         echo '<td valign="top">';
+         echo $user;
+         echo '</td>';
+         echo '<td valign="top">';
+         echo $created;
+         echo '</td>';
+         echo '<td valign="top">';
+         echo $updated;
+         echo '</td>';
+         echo '<td valign="top">';
+         echo $id;
+         echo '</td>';
+         echo '</tr>';
+      
+      }
+      echo '</tbody>';
+   }
+
+   private static function getProfilesUsers() {
+      global $DB;
+      $result = $DB->request('SELECT `p`.`name` AS `profile`, `u`.`firstname` AS `firstname_user`, 
+                                     `u`.`realname` AS `realname_user`, `pu`.`created_at`, `pu`.`updated_at`, `pu`.`id` 
+                              FROM `glpi_plugin_gitlab_profiles_users` AS `pu`
+                                    LEFT JOIN `glpi_profiles` AS `p` ON (`p`.`id` = `pu`.`profile_id`)
+                                    LEFT JOIN `glpi_users` AS `u` ON (`u`.`id` = `pu`.`user_id`)');
+      return $result;
+   }
 }
