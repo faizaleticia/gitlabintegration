@@ -9,8 +9,8 @@ Session::checkLoginUser();
 //  } else {
 //     Html::helpHeader(__("Permitions Gitlab", "gitlabintegration"), $_SERVER['PHP_SELF']);
 //  }
-
-Html::header(PluginGitlabIntegrationProfiles::getTypeName(), $_SERVER['PHP_SELF'], "admin", "group");
+Html::header(PluginGitlabIntegrationProfiles::getTypeName(), $_SERVER['PHP_SELF'],
+             "admin", "plugingitlabintegrationmenu", "profiles");
 
 PluginGitlabIntegrationProfiles::title();
 Search::show('PluginGitlabIntegrationProfiles');

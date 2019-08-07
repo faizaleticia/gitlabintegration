@@ -22,7 +22,7 @@ function plugin_init_gitlabintegration() {
 	}
 
 	// add entry to configuration menu
-	$PLUGIN_HOOKS['menu_toadd']['gitlabintegration']['admin'] = 'PluginGitlabIntegrationMenu';
+	$PLUGIN_HOOKS['menu_toadd']['gitlabintegration']['admin'] = ['admin' => 'PluginGitlabIntegrationMenu'];
 }
 
 
