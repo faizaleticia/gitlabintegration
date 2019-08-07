@@ -35,10 +35,24 @@ define('PLUGIN_ROOT', '../../..');
 class PluginGitlabIntegrationProfiles extends CommonDBTM {
    static $rightname = 'profiles';
    
+   /**
+    * Display contents the create of profiles permitions.
+    *
+    * @param void
+    *
+    * @return boolean with the permition of update
+    */
    static function canCreate() {
       return self::canUpdate();
    }
 
+   /**
+    * Display contents the title of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    static function title() {
       echo "<table class='tab_glpi'><tbody>";
       echo "<tr>";
@@ -52,16 +66,36 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo "</tbody></table>";
    }
 
+   /**
+    * Display contents the summary of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    static function configPage() {
       $numrows = 0;
       Html::printPager(0, $numrows, $_SERVER['PHP_SELF'], '');
    }
 
-   // Should return the localized name of the type
+   /**
+    * Display contents the title name of profiles permitions.
+    *
+    * @param int $nb
+    *
+    * @return string of the localized name of the type
+    */
    static function getTypeName($nb = 0) {
       return 'Permitions Gitlab';
    }
 
+   /**
+    * Display contents the search URL of profiles permitions.
+    *
+    * @param boolean $full
+    *
+    * @return string contents the search URL
+    */
    static function getSearchURL($full = true) {
       global $CFG_GLPI;
       $front_fields = "/plugins/gitlabintegration/front";
@@ -70,6 +104,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       return $link;
    }
 
+   /**
+    * Display contents the form URL of profiles permitions.
+    *
+    * @param boolean $full
+    *
+    * @return string contents the form URL
+    */
    static function getFormURL($full = true) {
       global $CFG_GLPI;
       $front_fields = "/plugins/gitlabintegration/front";
@@ -78,6 +119,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       return $link;
    }
    
+   /**
+    * Display contents the principal form of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    static function massiveActions() {
       self::headMassiveActions(true);
 
@@ -86,6 +134,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       self::headMassiveActions(false);
    }
 
+   /**
+    * Display contents the principal head of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    private static function headMassiveActions($top = true) {
       echo '<form name = "massformUser" method="post" action="/front/massiveaction.php">';
       echo '<table class="tab_glpi" width="95%">';
@@ -107,6 +162,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '</form>';
    }
 
+   /**
+    * Display contents the principal table of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    private static function tableMassiveActions() {
       echo '<div class="center">';
       echo '<table border="0" class="tab_cadrehov">';
@@ -117,6 +179,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '</div>';
    }
 
+   /**
+    * Display contents the title of principal Table of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    private static function titleTable() {
       echo '<thread>';
       echo '<tr class="tab_bg_2">';
@@ -142,6 +211,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '</thread>';
    }
 
+   /**
+    * Display contents the body of the principal table of profiles permitions.
+    *
+    * @param void
+    *
+    * @return void
+    */
    private static function bodyTable() {
       $result = self::getProfilesUsers();
 
@@ -178,6 +254,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '</tbody>';
    }
 
+   /**
+    * Display contents the profiles of profiles permitions.
+    *
+    * @param void
+    *
+    * @return array contents the columns of table glpi_plugin_gitlab_profiles_users
+    */
    private static function getProfilesUsers() {
       global $DB;
       $result = $DB->request('SELECT `p`.`name` AS `profile`, `u`.`firstname` AS `firstname_user`, 
