@@ -43,7 +43,7 @@ class PluginGitlabIntegrationItemForm {
       global $CFG_GLPI;
       $item = $params['item'];
 
-      $canCreate = self::verifyPermition();
+      $canCreate = self::verifyPermission();
 
       if ($item::getType() == Ticket::getType() && ($item->getField('id') != 0) && ($canCreate)) {
          $options = $params['options'];
@@ -70,7 +70,7 @@ class PluginGitlabIntegrationItemForm {
          
          echo "<td style='text-align: left; width: 5px'>";
          
-         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $item->getField('content') . "\")'>Create Issue</a>";
+         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $item->getField('content') . "\")'>Create Issue</div>";
 
          echo "</td>";
          echo '</tr>';
@@ -100,13 +100,13 @@ class PluginGitlabIntegrationItemForm {
    }  
    
    /**
-    * Display contents at the profiles have permition of item forms.
+    * Display contents at the profiles have Permission of item forms.
     *
     * @param void
     *
     * @return boolean $canCreate
     */
-   static private function verifyPermition() {
+   static private function verifyPermission() {
       global $DB;
       $result = $DB->request('glpi_plugin_gitlab_profiles_users', ['FIELDS' => 'profile_id']);
       // => SELECT `profile_id` FROM `glpi_plugin_gitlab_profiles_users`

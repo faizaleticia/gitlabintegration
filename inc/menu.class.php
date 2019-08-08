@@ -35,18 +35,18 @@ class PluginGitlabIntegrationMenu extends CommonGLPI {
     static $rightname = 'entity';
 
     /**
-    * Display contents the menu name of profiles permitions.
+    * Display contents the menu name of profiles Permission.
     *
     * @param void
     *
     * @return string with the menu name
     */
     static function getMenuName() {
-        return __("Permitions Gitlab", "gitlabintegration");
+        return __("Permissions Gitlab", "gitlabintegration");
     }
 
     /**
-    * Display contents the menu option of profiles permitions.
+    * Display contents the menu option of profiles Permissions.
     *
     * @param void
     *

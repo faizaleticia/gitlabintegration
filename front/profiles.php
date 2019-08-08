@@ -2,8 +2,6 @@
 define('GLPI_ROOT', '../../..');
 include (GLPI_ROOT . "/inc/includes.php");
 
-PluginGitlabIntegrationEventLog::errorLog($_GET['itemtype']);
-
 Session::checkLoginUser();
 
 Html::header(PluginGitlabIntegrationProfiles::getTypeName(), $_SERVER['PHP_SELF'],

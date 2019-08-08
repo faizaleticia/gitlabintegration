@@ -24,3 +24,39 @@
 .left {
     text-align:left; 
 }
+
+.top-form {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
+
+.form {
+    width: 75% !important;
+    font-family: 'Bitstream Vera Sans', Verdana, Tahoma, 'Sans serif';
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.table-form {
+    display: flex !important;
+    justify-content: center;
+}
+
+.label-form {
+    width: 15%;
+    display: inline-block;
+}
+
+.value-form {
+    width: 35%;
+    display: inline-block;
+    padding: 5px;
+}
+
+.button {
+    margin-top: 20px;
+}
+
+.flex {
+    display: flex;
+}
