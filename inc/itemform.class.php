@@ -129,8 +129,6 @@ class PluginGitlabIntegrationItemForm {
     * @return Dropdown component
     */
    static function dropdownProject(array $options = []) {
-      global $CFG_GLPI;
-   
       $p = [
          'name'     => 'project',
          'value'    => 0,

@@ -175,8 +175,22 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       self::headMassiveActions(false);
    }
 
-   static function formPrincipal() {
-      
+   static function dialogActions() {
+      echo '<div id="favDialog" role="dialog" title="Actions" style="width: 40% !important; height: 30% !important">';
+      echo '   <div>';
+      echo '      <div id="no_information" class="body-dialog">';
+      echo '         <img src="/pics/warning.png" alt="Warning"><br><br>';
+      echo '         <span class="b">No selected items</span><br>';
+      echo '      </div>';  
+      echo '      <div id="options_to_select" class="body-dialog">'; 
+      echo '         <div class="inline" style="margin-right:10px">Action: </div>';
+      $dropdown = self::dropdownActions(['value' => 'actions']); 
+      echo '      </div>';
+      echo '      <div id="button_confirm_action" style="margin:15px" class="body-dialog">';
+      echo '         <div class="primary-button" onClick="removePermission(' . $dropdown . ')">Post</div>';
+      echo '      </div>';
+      echo '   </div>';
+      echo '</div>';
    }
 
    /**
@@ -199,7 +213,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       }
       echo '</td>';
       echo '<td width="100%" class="left">';
-      echo '<a class="primary-button" onclick="" href="" title="Actions">'. __('Actions') . '</a>';
+      echo '<div class="primary-button" title="Actions" onClick="openActions()">'. __('Actions') . '</div>';
       echo '</td>';
       echo '</tr>';
       echo '</tbody>';
@@ -273,6 +287,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       $result = self::getProfilesUsers();
 
       echo '<tbody id="data">';
+
       foreach($result as $row) {
          $profile = $row['profile'];
          $user    = $row['firstname_user'] . ' ' . $row['realname_user'];
@@ -284,10 +299,10 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
 
          $checkboxName = mt_rand();
 
-         Html::showCheckbox(['name' => 'checkAll_' . $checkboxName, 'checked' => false]);
+         Html::showCheckbox(['name' => 'checkAll_' . $checkboxName . '_' . $id, 'checked' => false]);
 
          echo '<script type="text/javascript">';
-         echo 'setClickCheckAll("' . $checkboxName . '", false)';
+         echo 'setClickCheckAll("' . $checkboxName . '_' . $id . '", false)';
          echo '</script>';
 
          echo '</td>';
@@ -304,7 +319,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
          echo $id;
          echo '</td>';
          echo '</tr>';
-      
+         
       }
       echo '</tbody>';
    }
@@ -324,5 +339,33 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
                                     LEFT JOIN `glpi_profiles` AS `p` ON (`p`.`id` = `pu`.`profile_id`)
                                     LEFT JOIN `glpi_users` AS `u` ON (`u`.`id` = `pu`.`user_id`)');
       return $result;
+   }
+
+   /**
+    * Display contents at the component of permission profiles.
+    *
+    * @param array $options
+    *
+    * @return Dropdown component
+    */
+    static function dropdownActions(array $options = []) {
+      $p = [
+         'name'     => 'actions',
+         'value'    => 0,
+         'showtype' => 'normal',
+         'display'  => true,
+      ];
+   
+      if (is_array($options) && count($options)) {
+         foreach ($options as $key => $val) {
+            $p[$key] = $val;
+         }
+      }
+   
+      $values = []; 
+      $values[0] = '----';
+      $values[1] = __('Permanently Delete');
+
+      return Dropdown::showFromArray($p['name'], $values, $p);
    }
 }

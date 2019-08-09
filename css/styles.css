@@ -60,3 +60,11 @@
 .flex {
     display: flex;
 }
+
+.inline {
+    display: inline-block;
+}
+
+.body-dialog {
+    visibility: hidden;
+}

@@ -52,7 +52,9 @@ function addProfile(dropdown, userId) {
         url: "../ajax/profile.php",
         data: {
             profileId: newProfileSelected,
-            userId: userId
+            userId: userId,
+            modo: 1,
+            id: 0
         }
     })
         .success(function () {
@@ -117,5 +119,77 @@ function changeCheckInput(inputArray, checked) {
         if (inputArray[i].type == "checkbox") {
             inputArray[i].checked = checked;
         }
+    }
+}
+
+function openActions() {
+    countCheckSelected();
+    let div = document.getElementById('favDialog');
+    $(div).dialog();
+}
+
+function countCheckSelected() {
+    let inputsData = document.getElementById('data').getElementsByTagName('input');
+
+    let countSelected = 0;
+    for (i = 0; i < inputsData.length; i++) {
+        if (inputsData[i].type == "checkbox") {
+            if (inputsData[i].checked) {
+                countSelected++;
+            }
+        }
+    }
+    if (countSelected == 0) {
+        document.getElementById("no_information").style.visibility = "visible";
+        document.getElementById("options_to_select").style.visibility = "hidden";
+        document.getElementById("button_confirm_action").style.visibility = "hidden";
+    } else {
+        document.getElementById("no_information").style.visibility = "hidden";
+        document.getElementById("options_to_select").style.visibility = "visible";
+        document.getElementById("button_confirm_action").style.visibility = "visible";
+    }
+}
+
+function removePermission(dropdown) {
+    let dropdownActions = document.getElementById('dropdown_actions' + dropdown);
+    let selectedAction = dropdownActions.options[dropdownActions.selectedIndex].value;
+
+    if (selectedAction == 0) {
+        let div = document.getElementById('favDialog');
+        $(div).dialog('close');
+    } else {
+        let inputsData = document.getElementById('data').getElementsByTagName('input');
+
+        let countSelected = 0;
+        let idProfilesSelected = [];
+        for (i = 0; i < inputsData.length; i++) {
+            if (inputsData[i].type == "checkbox") {
+                if (inputsData[i].checked) {
+                    profile = inputsData[i].name.split("_");
+                    idProfilesSelected[countSelected] = profile[2];
+                    countSelected++;
+                }
+            }
+        }
+
+        idProfilesSelected.forEach(element => {
+            console.log(element);
+            jQuery.ajax({
+                type: "POST",
+                url: "../ajax/profile.php",
+                data: {
+                    profileId: 0,
+                    userId: 0,
+                    modo: 0,
+                    id: element
+                }
+            })
+                .success(function () {
+                    location.reload();
+                })
+                .fail(function () {
+                    return false;
+                });
+        });
     }
 }
