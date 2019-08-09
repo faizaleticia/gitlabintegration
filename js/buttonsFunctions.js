@@ -58,7 +58,6 @@ function addProfile(dropdown, userId) {
         }
     })
         .success(function () {
-            console.log("Entrou");
             window.open("../front/profiles.php", "_self");
         })
         .fail(function () {
@@ -173,7 +172,6 @@ function removePermission(dropdown) {
         }
 
         idProfilesSelected.forEach(element => {
-            console.log(element);
             jQuery.ajax({
                 type: "POST",
                 url: "../ajax/profile.php",
@@ -185,7 +183,7 @@ function removePermission(dropdown) {
                 }
             })
                 .success(function () {
-                    location.reload();
+                    window.open("../front/profiles.php", "_self");
                 })
                 .fail(function () {
                     return false;

@@ -70,13 +70,14 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
    /**
     * Display contents the summary of profiles Permission.
     *
-    * @param void
+    * @param int $start
     *
     * @return void
     */
-   static function configPage() {
-      $numrows = 0;
-      Html::printPager(0, $numrows, $_SERVER['PHP_SELF'], '');
+   static function configPage($start) {
+      $numrows = self::getCountProfilesUsers();
+
+      Html::printPager($start, $numrows, $_SERVER['PHP_SELF'], '');
    }
 
    /**
@@ -163,14 +164,14 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
    /**
     * Display contents the principal form of profiles Permission.
     *
-    * @param void
+    * @param int $start
     *
     * @return void
     */
-   static function massiveActions() {
+   static function massiveActions($start) {
       self::headMassiveActions(true);
 
-      self::tableMassiveActions();
+      self::tableMassiveActions($start);
 
       self::headMassiveActions(false);
    }
@@ -191,6 +192,35 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '      </div>';
       echo '   </div>';
       echo '</div>';
+   }
+
+   /**
+    * Display contains the options of search in permissions profiles.
+    *
+    * @param void
+    *
+    * @return array $tab
+    */
+   function rawSearchOptions() {
+      $tab = [];
+
+      $tab[] = [
+         'id'            => 1,
+         'table'         => self::getTable(),
+         'field'         => 'profile',
+         'name'          => __("Profile"),
+         'massiveaction' => false,
+      ];
+
+      $tab[] = [
+         'id'            => 2,
+         'table'         => self::getTable(),
+         'field'         => 'user',
+         'name'          => __("Created By"),
+         'massiveaction' => false,
+      ];
+
+      return $tab;
    }
 
    /**
@@ -224,15 +254,15 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
    /**
     * Display contents the principal table of profiles Permission.
     *
-    * @param void
+    * @param int $start
     *
     * @return void
     */
-   private static function tableMassiveActions() {
+   private static function tableMassiveActions($start) {
       echo '<div class="center">';
       echo '<table border="0" class="tab_cadrehov">';
       self::titleTable(1);
-      self::bodyTable();
+      self::bodyTable($start);
       self::titleTable(2);
       echo '</table>';
       echo '</div>';
@@ -279,47 +309,56 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
    /**
     * Display contents the body of the principal table of profiles Permission.
     *
-    * @param void
+    * @param int $start
     *
     * @return void
     */
-   private static function bodyTable() {
+   private static function bodyTable($start) {
+      $limit = $_SESSION['glpilist_limit'];
+
       $result = self::getProfilesUsers();
 
       echo '<tbody id="data">';
 
+      $count = 0;
+      $countStart = 0;
       foreach($result as $row) {
-         $profile = $row['profile'];
-         $user    = $row['firstname_user'] . ' ' . $row['realname_user'];
-         $created = $row['created_at'];
-         $id      = $row['id'];
-      
-         echo '<tr class="tab_bg_2">';
-         echo '<td width="10" valign="top">';
+         if ($start <= $count) {
+            if ($countStart < $limit) {
+               $profile = $row['profile'];
+               $user    = $row['firstname_user'] . ' ' . $row['realname_user'];
+               $created = $row['created_at'];
+               $id      = $row['id'];
+            
+               echo '<tr class="tab_bg_2">';
+               echo '<td width="10" valign="top">';
 
-         $checkboxName = mt_rand();
+               $checkboxName = mt_rand();
 
-         Html::showCheckbox(['name' => 'checkAll_' . $checkboxName . '_' . $id, 'checked' => false]);
+               Html::showCheckbox(['name' => 'checkAll_' . $checkboxName . '_' . $id, 'checked' => false]);
 
-         echo '<script type="text/javascript">';
-         echo 'setClickCheckAll("' . $checkboxName . '_' . $id . '", false)';
-         echo '</script>';
+               echo '<script type="text/javascript">';
+               echo 'setClickCheckAll("' . $checkboxName . '_' . $id . '", false)';
+               echo '</script>';
 
-         echo '</td>';
-         echo '<td valign="top">';
-         echo $profile;
-         echo '</td>';
-         echo '<td valign="top">';
-         echo $user;
-         echo '</td>';
-         echo '<td valign="top">';
-         echo $created;
-         echo '</td>';
-         echo '<td valign="top">';
-         echo $id;
-         echo '</td>';
-         echo '</tr>';
-         
+               echo '</td>';
+               echo '<td valign="top">';
+               echo $profile;
+               echo '</td>';
+               echo '<td valign="top">';
+               echo $user;
+               echo '</td>';
+               echo '<td valign="top">';
+               echo $created;
+               echo '</td>';
+               echo '<td valign="top">';
+               echo $id;
+               echo '</td>';
+               echo '</tr>';
+            }
+            $countStart++;
+         }
+         $count++;        
       }
       echo '</tbody>';
    }
@@ -339,6 +378,24 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
                                     LEFT JOIN `glpi_profiles` AS `p` ON (`p`.`id` = `pu`.`profile_id`)
                                     LEFT JOIN `glpi_users` AS `u` ON (`u`.`id` = `pu`.`user_id`)');
       return $result;
+   }
+
+   /**
+    * Display return registers amount.
+    *
+    * @param void
+    *
+    * @return int $amount
+    */
+   private static function getCountProfilesUsers() {
+      global $DB;
+      $result = $DB->request(['FROM' => 'glpi_plugin_gitlab_profiles_users', 'COUNT' => 'amount']);
+      
+      foreach($result as $row) {
+         $amount = $row['amount'];
+      }
+
+      return $amount;
    }
 
    /**
