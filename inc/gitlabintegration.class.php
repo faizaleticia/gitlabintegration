@@ -58,19 +58,19 @@ class PluginGitlabIntegrationGitlabIntegration {
         );
     
         try {
-        //    $curl = curl_init();
-        //    curl_setopt($curl, CURLOPT_URL, $url);
-        //    curl_setopt($curl, CURLOPT_POST, 1);
+           $curl = curl_init();
+           curl_setopt($curl, CURLOPT_URL, $url);
+           curl_setopt($curl, CURLOPT_POST, 1);
     
-        //    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+           curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             
-        //    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+           curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     
-        //    curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
+           curl_setopt($curl, CURLOPT_POSTFIELDS, $query);
     
-        //    $result = curl_exec($curl);
+           $result = curl_exec($curl);
     
-        //    curl_close($curl);
+           curl_close($curl);
         } catch (Exception $e) {
             PluginGitlabIntegrationParameters::ErrorLog($e->getMessage());
         }
