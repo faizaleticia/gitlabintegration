@@ -88,7 +88,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
     * @return string of the localized name of the type
     */
    static function getTypeName($nb = 0) {
-      return 'Permissions';
+      return __('Permissions');
    }
 
    /**
