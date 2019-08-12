@@ -140,7 +140,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '              </li>';
       echo '           </ul>';
       echo '           <div id="ui-tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom table-form" aria-live="polite" aria-labelledby="ui-id-2" role="tabpanel" aria-expanded="true" aria-hidden="false">';
-      echo '               <div class="form">';
+      echo '               <div class="form-custom">';
       echo '                   <div class="top-form">New Profile Permissions Gitlab</div>';
       echo '                   <div class="flex">';
       echo '                     <div class="top-form left label-form"><label for="dropdown__profiles_id$profilerand">' .  __('Profile') . '</label></div>';
