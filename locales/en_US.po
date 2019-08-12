@@ -17,7 +17,93 @@ msgstr ""
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: profiles.class.php:91
+#: profiles.class.php:93
 msgid "Permissions"
 msgstr "Permissions"
 
+#: profiles.class.php:148
+msgid "Profile"
+msgstr "Profile"
+
+#: profiles.class.php:146
+msgid "New user profile to give Gitlab permission"
+msgstr "New user profile to give Gitlab permission"
+
+#: profiles.class.php:182
+#: profiles.class.php:189
+#: profiles.class.php:248
+msgid "Actions"
+msgstr "Actions"
+
+#: profiles.class.php:298
+msgid "Created By"
+msgstr "Created By"
+
+#: setup.php:32
+msgid "Gitlab Integration"
+msgstr "Gitlab Integration"
+
+#: profile.class.php:301
+msgid "Created At"
+msgstr "Created At"
+
+#: profile.class.php:157
+msgid "Add"
+msgstr "Add"
+
+#: menu.class.php:45
+msgid "Permissions Gitlab"
+msgstr "Permissions Gitlab"
+
+#: menu.class.php:426
+msgid "Permanently Delete"
+msgstr "Permanently Delete"
+
+#: profile.php:426
+#: profile.php:35
+msgid "Permission granted with successfully!"
+msgstr "Permission granted with successfully!"
+
+#: issue.php:40
+msgid "Issue created successfully!"
+msgstr "Issue created successfully!"
+
+#: issue.php:38
+msgid "%2s created Issue"
+msgstr "%2s created Issue"
+
+#: issue.php:42
+msgid "Problem to create issue. Verify logs for more information!"
+msgstr "Problem to create issue. Verify logs for more information!"
+
+#: profile.php:23
+msgid "The selected profile already has permission. Verify logs for more information!"
+msgstr "The selected profile already has permission. Verify logs for more information!"
+
+#: profile.php:33
+msgid "%2s granted permission for profile "
+msgstr "%2s granted permission for profile "
+
+#: profile.php:51
+msgid "%2s removed permission for id "
+msgstr "%2s removed permission for id "
+
+#: itemform.class.php:59
+msgid "Gitlab Project"
+msgstr "Gitlab Project"
+
+#: profiles.class.php:186
+msgid "No selected items"
+msgstr "No selected items"
+
+#: profile.php:53
+msgid "Permission removed with successfully!"
+msgstr "Permission removed with successfully!"
+
+#: itemform.class.php:75
+msgid "Create Issue"
+msgstr "Create Issue"
+
+#: itemform.class.php:73
+msgid "Issue already created for the selected project. Do you want creat it again?"
+msgstr "Issue already created for the selected project. Do you want creat it again?"

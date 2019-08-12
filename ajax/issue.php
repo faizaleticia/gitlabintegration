@@ -35,11 +35,11 @@ if (class_exists('PluginGitlabIntegrationParameters')) {
 
     PluginGitlabIntegrationGitlabIntegration::CreateIssue($selectedProject, $title, $description);
 
-    PluginGitlabIntegrationEventLog::Log($ticketId, 'ticket', $_SESSION["glpi_currenttime"], 'issue', 4, sprintf(__('%2s created Issue'), $_SESSION["glpiname"]));
+    PluginGitlabIntegrationEventLog::Log($ticketId, 'ticket', $_SESSION["glpi_currenttime"], 'issue', 4, sprintf(__('%2s created Issue', 'gitlabintegration'), $_SESSION["glpiname"]));
 
-    Session::addMessageAfterRedirect(__('Issue created successfully!'));
+    Session::addMessageAfterRedirect(__('Issue created successfully!', 'gitlabintegration'));
 } else {
-    Session::addMessageAfterRedirect(__('Problem to create issue. Verify logs for more information!'));
+    Session::addMessageAfterRedirect(__('Problem to create issue. Verify logs for more information!', 'gitlabintegration'));
 
     $erro = "[" . $_SESSION["glpi_currenttime"] . "] glpiphplog.ERROR: PluginGitlabIntegrationParameters::create() in issue.php line 34" . PHP_EOL;
     $erro = $erro . "  ***PHP Notice: Class PluginGitlabIntegrationParameters not created";

@@ -3,9 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# polar147 <andrei_simoni@hotmail.com>, 2017
-# Arthur Ramos Schaefer <arthur.r.schaefer@gmail.com>, 2017
-# Arthur Ramos Schaefer <arthur.r.schaefer@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Plugin - Gitlab Integration\n"
@@ -20,6 +17,93 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: profiles.class.php:91
+#: profiles.class.php:93
 msgid "Permissions"
 msgstr "Permissões"
+
+#: profiles.class.php:148
+msgid "Profile"
+msgstr "Perfil"
+
+#: profiles.class.php:146
+msgid "New user profile to give Gitlab permission"
+msgstr "Novo perfil de usuário para dar permissão no Gitlab"
+
+#: profiles.class.php:182
+#: profiles.class.php:189
+#: profiles.class.php:248
+msgid "Actions"
+msgstr "Ações"
+
+#: profiles.class.php:298
+msgid "Created By"
+msgstr "Criado por"
+
+#: setup.php:32
+msgid "Gitlab Integration"
+msgstr "Integração com Gitlab"
+
+#: profile.class.php:301
+msgid "Created At"
+msgstr "Criado em"
+
+#: profile.class.php:157
+msgid "Add"
+msgstr "Adicionar"
+
+#: menu.class.php:45
+msgid "Permissions Gitlab"
+msgstr "Permissões Gitlab"
+
+#: menu.class.php:426
+msgid "Permanently Delete"
+msgstr "Excluir permanentemente"
+
+#: profile.php:426
+#: profile.php:35
+msgid "Permission granted with successfully!"
+msgstr "Permissão concedida com sucesso!"
+
+#: issue.php:40
+msgid "Issue created successfully!"
+msgstr "Issue criada com sucesso!"
+
+#: issue.php:38
+msgid "%2s created Issue"
+msgstr "%2s criou a issue"
+
+#: issue.php:42
+msgid "Problem to create issue. Verify logs for more information!"
+msgstr "Problema ao criar issue. Verifique os logs para mais informações!"
+
+#: profile.php:23
+msgid "The selected profile already has permission. Verify logs for more information!"
+msgstr "O perfil selecionado já possui permissão. Verifique os logs para mais informações!"
+
+#: profile.php:33
+msgid "%2s granted permission for profile "
+msgstr "%2s concedeu permissão para o perfil "
+
+#: profile.php:51
+msgid "%2s removed permission for id "
+msgstr "%2s removeu a permissão para o id "
+
+#: itemform.class.php:59
+msgid "Gitlab Project"
+msgstr "Projeto Gitlab"
+
+#: profiles.class.php:186
+msgid "No selected items"
+msgstr "Não há itens selecionados"
+
+#: profile.php:53
+msgid "Permission removed with successfully!"
+msgstr "Permissão removida com sucesso!"
+
+#: itemform.class.php:75
+msgid "Create Issue"
+msgstr "Criar Issue"
+
+#: itemform.class.php:73
+msgid "Issue already created for the selected project. Do you want creat it again?"
+msgstr "Issue já foi criada para o projeto selecionado. Deseja criar novamente?"

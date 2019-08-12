@@ -20,7 +20,7 @@ if ($profileId) {
             $erro = $erro . "  ***PHP Notice: The selected profile already has permission: Profile Id: " . $profileId;
             PluginGitlabIntegrationEventLog::ErrorLog($erro);
     
-            Session::addMessageAfterRedirect(__('The selected profile already has permission. Verify logs for more information!'));
+            Session::addMessageAfterRedirect(__('The selected profile already has permission. Verify logs for more information!', 'gitlabintegration'));
         } else {
             $DB->insert(
                 'glpi_plugin_gitlab_profiles_users', [
@@ -30,9 +30,9 @@ if ($profileId) {
                 ]
             );
     
-            PluginGitlabIntegrationEventLog::Log($profileId, 'profiles', $_SESSION["glpi_currenttime"], 'gitlab', 4, sprintf(__('%2s granted permission for profile ' . $profileId), $_SESSION["glpiname"]));
+            PluginGitlabIntegrationEventLog::Log($profileId, 'profiles', $_SESSION["glpi_currenttime"], 'gitlab', 4, sprintf(__('%2s granted permission for profile ' . $profileId, 'gitlabintegration'), $_SESSION["glpiname"]));
     
-            Session::addMessageAfterRedirect(__('Permission granted with successfully!'));
+            Session::addMessageAfterRedirect(__('Permission granted with successfully!', 'gitlabintegration'));
         } 
     }
 }
@@ -48,9 +48,9 @@ if ($id) {
                 ]
             );
 
-            PluginGitlabIntegrationEventLog::Log($id, 'profiles', $_SESSION["glpi_currenttime"], 'gitlab', 4, sprintf(__('%2s removed permission for id ' . $id), $_SESSION["glpiname"]));
+            PluginGitlabIntegrationEventLog::Log($id, 'profiles', $_SESSION["glpi_currenttime"], 'gitlab', 4, sprintf(__('%2s removed permission for id ' . $id, 'gitlabintegration'), $_SESSION["glpiname"]));
     
-            Session::addMessageAfterRedirect(__('Permission removed with successfully!'));
+            Session::addMessageAfterRedirect(__('Permission removed with successfully!', 'gitlabintegration'));
         } else {
             $erro = "[" . $_SESSION["glpi_currenttime"] . "] glpiphplog.ERROR: PluginGitlabIntegrationProfiles::permissions() in profile.php line 10" . PHP_EOL;
             $erro = $erro . "  ***PHP Notice: The selected profile can't be deleted: Id: " . $id;

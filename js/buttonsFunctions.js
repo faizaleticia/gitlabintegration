@@ -1,11 +1,11 @@
-function createIssue(ticketId, dropdown, selectedProject, ticketName, ticketContent) {
+function createIssue(ticketId, dropdown, selectedProject, ticketName, ticketContent, $message) {
     let dropdownProject = document.getElementById('dropdown_project' + dropdown);
     let newSelectedProject = dropdownProject.options[dropdownProject.selectedIndex].value;
 
     creatAgain = true;
 
     if (selectedProject == newSelectedProject) {
-        creatAgain = confirm('Issue already created for the selected project. Do you want creat it again?')
+        creatAgain = confirm($message);
     }
 
     if (creatAgain) {

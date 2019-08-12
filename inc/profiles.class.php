@@ -90,7 +90,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
     * @return string of the localized name of the type
     */
    static function getTypeName($nb = 0) {
-      return __('Permissions');
+      return __('Permissions', 'gitlabintegration');
    }
 
    /**
@@ -143,9 +143,9 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '           </ul>';
       echo '           <div id="ui-tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom table-form" aria-live="polite" aria-labelledby="ui-id-2" role="tabpanel" aria-expanded="true" aria-hidden="false">';
       echo '               <div class="form-custom">';
-      echo '                   <div class="top-form">New Profile Permissions Gitlab</div>';
+      echo '                   <div class="top-form">' . __('New user profile to give Gitlab permission', 'gitlabintegration') . '</div>';
       echo '                   <div class="flex">';
-      echo '                     <div class="top-form left label-form"><label for="dropdown__profiles_id$profilerand">' .  __('Profile') . '</label></div>';
+      echo '                     <div class="top-form left label-form"><label for="dropdown__profiles_id$profilerand">' .  __('Profile', 'gitlabintegration') . '</label></div>';
       echo '                     <div class="left value-form">';
       $profilerand = mt_rand();
       Profile::dropdownUnder(['name'  => '_profiles_id',
@@ -154,7 +154,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo '                     </div>';
       echo '                   </div>';
       echo '                   <div class="button">';
-      echo '                       <div class="primary-button" onClick="addProfile('.$profilerand.','.$_SESSION['glpiID'].')">' . __('Add') . '</div>';
+      echo '                       <div class="primary-button" onClick="addProfile('.$profilerand.','.$_SESSION['glpiID'].')">' . __('Add', 'gitlabintegration') . '</div>';
       echo '                   </div>';
       echo '               </div>';
       echo '           </div>';
@@ -179,14 +179,14 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
    }
 
    static function dialogActions() {
-      echo '<div id="favDialog" role="dialog" title="Actions" style="width: 40% !important; height: 30% !important">';
+      echo '<div id="favDialog" role="dialog" title="'. __('Actions', 'gitlabintegration') .'" style="width: 40% !important; height: 30% !important">';
       echo '   <div>';
       echo '      <div id="no_information" class="body-dialog">';
       echo '         <img src="/pics/warning.png" alt="Warning"><br><br>';
-      echo '         <span class="b">No selected items</span><br>';
+      echo '         <span class="b">' . __('No selected items', 'gitlabintegration') . '</span><br>';
       echo '      </div>';  
       echo '      <div id="options_to_select" class="body-dialog">'; 
-      echo '         <div class="inline" style="margin-right:10px">Action: </div>';
+      echo '         <div class="inline" style="margin-right:10px">' . __('Actions', 'gitlabintegration') . ': </div>';
       $dropdown = self::dropdownActions(['value' => 'actions']); 
       echo '      </div>';
       echo '      <div id="button_confirm_action" style="margin:15px" class="body-dialog">';
@@ -210,7 +210,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
          'id'            => 1,
          'table'         => self::getTable(),
          'field'         => 'profile',
-         'name'          => __("Profile"),
+         'name'          => __("Profile", "gitlabintegration"),
          'massiveaction' => false,
       ];
 
@@ -218,7 +218,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
          'id'            => 2,
          'table'         => self::getTable(),
          'field'         => 'user',
-         'name'          => __("Created By"),
+         'name'          => __("Created By", "gitlabintegration"),
          'massiveaction' => false,
       ];
 
@@ -245,7 +245,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       }
       echo '</td>';
       echo '<td width="100%" class="left">';
-      echo '<div class="primary-button" title="Actions" onClick="openActions()">'. __('Actions') . '</div>';
+      echo '<div class="primary-button" title="'. __('Actions', 'gitlabintegration') . '" onClick="openActions()">'. __('Actions', 'gitlabintegration') . '</div>';
       echo '</td>';
       echo '</tr>';
       echo '</tbody>';
@@ -292,13 +292,13 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
 
       echo '</th>';
       echo '<th class="left" style="width:30%">';
-      echo '<a href="#">Profile</a>';
+      echo '<a href="#">'. __('Profile', 'gitlabintegration') . '</a>';
       echo '</th>';
       echo '<th class="left" style="width:35%">';
-      echo '<a href="#">Created By</a>';
+      echo '<a href="#">' . __('Created By', 'gitlabintegration') . '</a>';
       echo '</th>';
       echo '<th>';
-      echo '<a href="#">Created At</a>';
+      echo '<a href="#">' . __('Created At', 'gitlabintegration') . '</a>';
       echo '</th>';
       echo '<th style="width:100px">';
       echo '<a href="#">ID</a>';
@@ -423,7 +423,7 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
    
       $values = []; 
       $values[0] = '----';
-      $values[1] = __('Permanently Delete');
+      $values[1] = __('Permanently Delete', 'gitlabintegration');
 
       return Dropdown::showFromArray($p['name'], $values, $p);
    }

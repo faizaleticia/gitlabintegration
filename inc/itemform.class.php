@@ -56,7 +56,7 @@ class PluginGitlabIntegrationItemForm {
          echo "</tr>";
 
          echo "<tr><$firstelt>";
-         echo '<label>' . __('Gitlab Project') . '</label>';
+         echo '<label>' . __('Gitlab Project', 'gitlabintegration') . '</label>';
          echo "</$firstelt><td>";
 
          $dropdown = self::dropdownProject(['value' => 'Project']);
@@ -70,7 +70,9 @@ class PluginGitlabIntegrationItemForm {
          
          echo "<td style='text-align: left; width: 5px'>";
          
-         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $item->getField('content') . "\")'>Create Issue</div>";
+         $message = __('Issue already created for the selected project. Do you want creat it again?', 'gitlabintegration');
+
+         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $item->getField('content') . "\", \"" . $message . "\")'>" . __("Create Issue", "gitlabintegration") . "</div>";
 
          echo "</td>";
          echo '</tr>';
