@@ -33,7 +33,7 @@ function plugin_version_gitlabintegration() {
 			     'version' 		  => '0.0.1',
 				 'author'		  => 'Fáiza Letícia Schoeninger',
 				 'license'		  => 'GPLv3+',
-				 'homepage'		  => 'https://stwautomacao.com.br',
+				 'homepage'		  => 'https://github.com/faizaleticia',
 				 'minGlpiVersion' => '9.4'
 	);
 }
