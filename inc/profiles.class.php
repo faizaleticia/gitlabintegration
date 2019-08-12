@@ -58,7 +58,9 @@ class PluginGitlabIntegrationProfiles extends CommonDBTM {
       echo "<table class='tab_glpi'><tbody>";
       echo "<tr>";
       echo "<td width='45px'>";
-      echo"<img src='".PLUGIN_ROOT."/plugins/gitlabintegration/img/just-logo.png' height='35px' alt='Gitlab STW' title='Gitlab STW'>";
+      echo "<a href='https://gitlab.stwautomacao.com.br' target='_blank'>";
+      echo "<img class='logo' src='".PLUGIN_ROOT."/plugins/gitlabintegration/img/just-logo.png' height='35px' alt='Gitlab STW' title='Gitlab STW'>";
+      echo "</a>";
       echo "</td>";
       echo "<td>";
       echo "<a class='vsubmit' href='https://gitlab.stwautomacao.com.br' target='_blank'>Gitlab STW</a>";

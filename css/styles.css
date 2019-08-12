@@ -68,3 +68,13 @@
 .body-dialog {
     visibility: hidden;
 }
+
+.logo {
+    transition-duration: .4s;
+}
+
+.logo:hover {   
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
