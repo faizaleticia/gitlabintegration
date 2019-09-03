@@ -40,6 +40,7 @@ function setSelectedProject(dropdown, selectedProject) {
         }
         let span = document.getElementById('select2-dropdown_project' + dropdown + '-container');
         span.textContent = dropdownProject.options[dropdownProject.selectedIndex].text;
+        span.title = dropdownProject.options[dropdownProject.selectedIndex].text;
     }
 }
 
