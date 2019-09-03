@@ -89,7 +89,7 @@ class PluginGitlabIntegrationGitlabIntegration {
     static public function getProjects() {
         $parameters = PluginGitlabIntegrationParameters::getParameters();
 
-        $url = $parameters['url'] . 'api/v4/projects/';
+        $url = $parameters['url'] . 'api/v4/projects?per_page=100&order_by=name';
     
         $headers = array(
             'PRIVATE-TOKEN: ' . $parameters['token']
