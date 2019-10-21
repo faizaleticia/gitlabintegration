@@ -72,13 +72,21 @@ class PluginGitlabIntegrationItemForm {
          
          $message = __('Issue already created for the selected project. Do you want creat it again?', 'gitlabintegration');
 
-         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $item->getField('content') . "\", \"" . $message . "\")'>" . __("Create Issue", "gitlabintegration") . "</div>";
+         $content = self::getTextWithoutQuotationMarks($item->getField('content'));
+
+         echo "<div class='primary-button' onClick='createIssue(" . $item->getField('id') . " , " . $dropdown . " , " . $selectedProject . " , \"" . $item->getField('name') . "\" , \"" . $content . "\", \"" . $message . "\")'>" . __("Create Issue", "gitlabintegration") . "</div>";
 
          echo "</td>";
          echo '</tr>';
 
          echo '<tr style="padding:10px"><td style="padding:10px"></td></tr>';
       } 
+   }
+
+   static private function getTextWithoutQuotationMarks($text) {  
+     $bodytag = str_replace("'", "\"", $text);
+     $bodytag = str_replace("\"", "\\\"", $bodytag);
+     return $bodytag;
    }
 
    /**
