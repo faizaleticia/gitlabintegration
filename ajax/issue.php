@@ -31,7 +31,11 @@ if ($result->count() > 0) {
 
 if (class_exists('PluginGitlabIntegrationParameters')) {
     $title = $ticketId . ' - ' . $ticketName;
-    $description = str_replace('&lt;p&gt;', '', str_replace('&lt;/p&gt;', '', $ticketContent));;
+    $description = str_replace('&lt;p&gt;', '', str_replace('&lt;/p&gt;', '', $ticketContent));
+    $description = str_replace('&lt;br&gt;', '<br>', $description);
+    $description = str_replace('&lt;p style=\"padding-left: 40px;\"&gt;', '<p style="padding-left: 40px;">', $description);
+    $description = str_replace('&lt;', '<', $description);
+    $description = str_replace('&gt;', '>', $description);
 
     PluginGitlabIntegrationGitlabIntegration::CreateIssue($selectedProject, $title, $description);
 
