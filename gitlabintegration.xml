@@ -1,45 +1,45 @@
 <root>
-      <name>Gitlab Integration</name>
-      <key>gitlabintegration</key>
-      <state>stable</state>
-      <logo>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/logo.png</logo>
-      <description>
-         <short>
-            <en>Gitlab Integration with GLPI</en>
-            <pt>Integração do Gitlab com GLPI</pt>
-         </short>
-         <long>
-            <en>Gitlab Integration with GLPI</en>
-            <pt>Integração do Gitlab com GLPI</pt>
-         </long>
-      </description>
-      <homepage>https://github.com/faizaleticia/gitlabintegration-glpi</homepage>
-      <download>https://github.com/faizaleticia/gitlabintegration-glpi/releases</download>
-      <issues>https://github.com/faizaleticia/gitlabintegration-glpi/issues</issues>
-      <readme>https://github.com/faizaleticia/gitlabintegration-glpi/blob/master/README.md</readme>
-      <authors>
-         <author>Fáiza Schoeninger</author>
-      </authors>
-      <versions>
-         <version>
-            <num>0.0.1</num>
-            <compatibility>9.4</compatibility>
-         </version>
-      </versions>
-      <langs>
-         <lang>en_GB</lang>
-         <lang>pt_BR</lang>
-      </langs>
-      <license>GPL v3</license>
-      <tags>
-         <en>
-            <tag>gitlabintegration</tag>
-         </en>
-         <pt>
-            <tag>gitlabintegration</tag>
-         </pt>
-      </tags>
-      <screenshots>
-         <!-- <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/screenshots/first.png</screenshot> -->
-      </screenshots>
+	<name>Gitlab Integration</name>
+	<key>gitlabintegration</key>
+	<state>stable</state>
+	<logo>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/logo.png</logo>
+	<description>
+	   <short>
+		  <en>Gitlab Integration with GLPI</en>
+		  <pt>Integração do Gitlab com GLPI</pt>
+	   </short>
+	   <long>
+		  <en>Gitlab Integration with GLPI</en>
+		  <pt>Integração do Gitlab com GLPI</pt>
+	   </long>
+	</description>
+	<homepage>https://github.com/faizaleticia/gitlabintegration</homepage>
+	<download>https://github.com/faizaleticia/gitlabintegration/releases</download>
+	<issues>https://github.com/faizaleticia/gitlabintegration/issues</issues>
+	<readme>https://github.com/faizaleticia/gitlabintegration/blob/master/README.md</readme>
+	<authors>
+	   <author>Fáiza Schoeninger</author>
+	</authors>
+	<versions>
+	   <version>
+		  <num>0.0.2</num>
+		  <compatibility>9.4</compatibility>
+	   </version>
+	</versions>
+	<langs>
+	   <lang>en_GB</lang>
+       <lang>pt_BR</lang>
+	</langs>
+	<license>GPL v3</license>
+	<tags>
+	   <en>
+		  <tag>gitlabintegration</tag>
+	   </en>
+	   <lang>
+		  <tag>gitlabintegration</tag>
+	   </lang>
+	</tags>
+	<screenshots>
+	   <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/logo.png</screenshot>
+	</screenshots>
 </root>
