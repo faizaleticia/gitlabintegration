@@ -2,7 +2,7 @@
   <name>Gitlab Integration</name>
   <key>gitlabintegration</key>
   <state>stable</state>
-  <logo>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/logo.png</logo>
+  <logo>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/glpi_logo.png</logo>
   <description>
     <short>
       <en>Gitlab Integration with GLPI</en>
@@ -40,6 +40,10 @@
     </pt>
   </tags>
   <screenshots>
-    <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/logo.png</screenshot>
+    <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/screenshots/personal_token_gitlab.png</screenshot>
+    <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/screenshots/plugin_installed.png</screenshot>
+    <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/screenshots/gitlab_permission.png</screenshot>
+    <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/screenshots/ticket_create_issue.png</screenshot>
+    <screenshot>https://github.com/faizaleticia/gitlabintegration-glpi/tree/master/img/screenshots/issue_gitlab.png</screenshot>
   </screenshots>
 </root>
