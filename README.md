@@ -1,3 +1,16 @@
+<div align="center">
+    <img src="https://raw.githubusercontent.com/faizaleticia/gitlabintegration/master/img/glpi_logo.png" width="300px"/>
+</div>
+
+<p align="center">
+  <img alt="Release version" src="https://img.shields.io/github/v/release/faizaleticia/gitlabintegration">
+   <img alt="Repository size" src="https://img.shields.io/github/repo-size/faizaleticia/gitlabintegration">
+  <img alt="Open issues" src="https://img.shields.io/github/issues-raw/faizaleticia/gitlabintegration">
+  <img alt="Last commit on GitHub" src="https://img.shields.io/github/last-commit/faizaleticia/gitlabintegration">
+  <img alt="GitHub license" src="https://img.shields.io/github/license/faizaleticia/gitlabintegration">
+  <img alt="Author Fáiza" src="https://img.shields.io/badge/author-F%C3%A1iza%20Let%C3%ADcia%20Schoeninger-blue">
+</p>
+
 # Gitlab Integration
 
 Gitlab Integration is a plugin to use into GLPI - Gestionnaire Libre de Parc Informatique when the tickets needs to integrate with Gitlab.
