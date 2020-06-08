@@ -2,6 +2,8 @@
     <img src="https://raw.githubusercontent.com/faizaleticia/gitlabintegration/master/img/glpi_logo.png" width="300px"/>
 </div>
 
+#
+
 <p align="center">
   <img alt="Release version" src="https://img.shields.io/github/v/release/faizaleticia/gitlabintegration">
    <img alt="Repository size" src="https://img.shields.io/github/repo-size/faizaleticia/gitlabintegration">
