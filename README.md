@@ -31,7 +31,7 @@ After this, is necessary install the plugin and enabled this.
 
 ## Giving permissions to users profiles
 
-For give permission is necessary access the option ```Permissions Gitlab``` located at ```Administration``.
+For give permission is necessary access the option ```Permissions Gitlab``` located at ```Administration```.
 
 Then it's possible adds any available profile.
 
